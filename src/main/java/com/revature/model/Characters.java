@@ -16,38 +16,30 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.springframework.stereotype.Component;
 
-@NamedQueries({
-	@NamedQuery(name = "getAll", query = "FROM Characters"),
-	//@NamedQuery(name = "getSeries", query = "FROM Pokemon WHERE name = 'Bulbasaur'")
-})
 
+
+//@NamedQueries({
+//	@NamedQuery(name = "getAll", query = "FROM Characters"),
+//	//@NamedQuery(name = "getSeries", query = "FROM Pokemon WHERE name = 'Bulbasaur'")
+//})
+
+@Component
 @Entity
 @Table(name = "CHARACTERS")
 public class Characters {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name ="char_id")
+	@Column
 	private int charId;
 	
 	@Column(name = "name")
 	private String name;
 	
-	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
-	@JoinColumn(name = "series_id")
-	private Series series;
-	
-//	@JsonManagedReference(value = "Series_id")
-//	private Series series1;
-	
-	@OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
-	@JoinColumn(name = "skill_id")
-	private SkillSet skill;
-	
-//	@JsonManagedReference(value = "skill_id")
-//	private SkillSet skill1;
+	@Column(name = "skill_set")
+	private String skill;
 	
 	@Column(name = "special_ability")
 	private String special;
@@ -61,12 +53,16 @@ public class Characters {
 	@Column(name = "rank")
 	private String rank;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "series_id")
+	private Series series;
+	
 	public Characters() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Characters(int charId, String name, Series series, SkillSet skill, String special, String image,
+	public Characters(int charId, String name, Series series, String skill, String special, String image,
 			String profile, String rank) {
 		super();
 		this.charId = charId;
@@ -77,6 +73,19 @@ public class Characters {
 		this.image = image;
 		this.profile = profile;
 		this.rank = rank;
+	}
+
+	
+	public Characters(String name, String skill, String special, String image, String profile, String rank,
+			Series series) {
+		super();
+		this.name = name;
+		this.skill = skill;
+		this.special = special;
+		this.image = image;
+		this.profile = profile;
+		this.rank = rank;
+		this.series = series;
 	}
 
 	public int getCharId() {
@@ -103,11 +112,11 @@ public class Characters {
 		this.series = series;
 	}
 
-	public SkillSet getSkill() {
+	public String getSkill() {
 		return skill;
 	}
 
-	public void setSkill(SkillSet skill) {
+	public void setSkill(String skill) {
 		this.skill = skill;
 	}
 
@@ -168,6 +177,7 @@ public class Characters {
 		return "Characters [charId=" + charId + ", name=" + name + ", series=" + series + ", skill=" + skill
 				+ ", special=" + special + ", image=" + image + ", profile=" + profile + ", rank=" + rank + "]";
 	}
+
 	
 	
 	
