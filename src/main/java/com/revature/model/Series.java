@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Objects;
 //import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,9 +17,8 @@ import javax.persistence.OneToMany;
 //import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.springframework.stereotype.Component;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-@Component
 @Entity
 @Table(name = "SERIES")
 public class Series {
@@ -31,12 +29,13 @@ public class Series {
 	private int series_Id;
 	
 	@Column(name = "SeriesName")
-	private AnimeSeries series;
+	private String series;
 
 	@Column(name = "SeriesDescrip")
 	private String description;
 	
-	@OneToMany(mappedBy = "trainer", fetch = FetchType.EAGER)
+	@JsonManagedReference
+	@OneToMany(mappedBy = "series", fetch = FetchType.EAGER)
 	private List<Characters> characters = new ArrayList<>();
 	
 	public Series() {
@@ -44,7 +43,7 @@ public class Series {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Series(int series_Id, AnimeSeries series, String description, List<Characters> characters) {
+	public Series(int series_Id, String series, String description, List<Characters> characters) {
 		super();
 		this.series_Id = series_Id;
 		this.series = series;
@@ -52,7 +51,7 @@ public class Series {
 		this.characters = characters;
 	}
 
-	public Series(AnimeSeries series, String description, List<Characters> characters) {
+	public Series(String series, String description, List<Characters> characters) {
 		super();
 		this.series = series;
 		this.description = description;
@@ -67,11 +66,11 @@ public class Series {
 		this.series_Id = series_Id;
 	}
 
-	public AnimeSeries getSeries() {
+	public String getSeries() {
 		return series;
 	}
 
-	public void setSeries(AnimeSeries series) {
+	public void setSeries(String series) {
 		this.series = series;
 	}
 
@@ -98,15 +97,15 @@ public class Series {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (!(obj instanceof Series)) {
 			return false;
-		if (getClass() != obj.getClass())
-			return false;
+		}
 		Series other = (Series) obj;
 		return Objects.equals(characters, other.characters) && Objects.equals(description, other.description)
-				&& series == other.series && series_Id == other.series_Id;
+				&& Objects.equals(series, other.series) && series_Id == other.series_Id;
 	}
 
 	@Override
@@ -114,7 +113,6 @@ public class Series {
 		return "Series [series_Id=" + series_Id + ", series=" + series + ", description=" + description
 				+ ", characters=" + characters + "]";
 	}
-
 	
 		
 }

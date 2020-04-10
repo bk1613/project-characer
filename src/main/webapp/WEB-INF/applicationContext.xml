@@ -3,18 +3,28 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/context 
     http://www.springframework.org/schema/context/spring-context.xsd
     http://www.springframework.org/schema/tx 
-    http://www.springframework.org/schema/tx/spring-tx.xsd">
-
-	<context:component-scan base-package="com.revature"></context:component-scan>
+    http://www.springframework.org/schema/tx/spring-tx.xsd
+    http://www.springframework.org/schema/mvc 
+    http://www.springframework.org/schema/mvc/spring-mvc.xsd
+    http://www.springframework.org/schema/aop 
+    http://www.springframework.org/schema/aop/spring-aop.xsd">
+   
+    <context:component-scan base-package="com.revature"></context:component-scan>
+    <mvc:annotation-driven/>
     <tx:annotation-driven/>
+    <aop:aspectj-autoproxy/>
+    <context:annotation-config/>
+   
     <bean name="ourDataSource" class="org.apache.commons.dbcp.BasicDataSource">
     	<property name="url" value="jdbc:oracle:thin:@training.c7loopaqgyj0.us-east-2.rds.amazonaws.com:1521:orcl"/>
-    	<property name="username" value="admin"/>
-    	<property name="password" value="Dec31995"/>
+    	<property name="username" value="characterspro"/>
+    	<property name="password" value="password"/>
     	<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
     </bean>
     <bean name="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
@@ -24,9 +34,8 @@
     		<props>
     			<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
     			<prop key="show_sql">true</prop>
-    			<prop key="hibernate.format_sql">true</prop>
-    			<prop key="hibernate.hbm2ddl.auto">update</prop>
-    			<prop key="hibernate.default_schema">ormdemo2</prop>
+    			<prop key="hibernate.hbm2ddl.auto">create</prop>
+    			<prop key="hibernate.default_schema">characterspro</prop>
     		</props>
     	</property>
     </bean>
@@ -34,4 +43,5 @@
     	<property name="sessionFactory" ref="sessionFactory"/>
     	<property name="nestedTransactionAllowed" value="true"/>
     </bean>
+    
 </beans>

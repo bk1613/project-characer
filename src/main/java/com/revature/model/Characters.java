@@ -1,8 +1,10 @@
 package com.revature.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,21 +13,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.springframework.stereotype.Component;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-
-
-//@NamedQueries({
-//	@NamedQuery(name = "getAll", query = "FROM Characters"),
-//	//@NamedQuery(name = "getSeries", query = "FROM Pokemon WHERE name = 'Bulbasaur'")
-//})
-
-@Component
 @Entity
 @Table(name = "CHARACTERS")
 public class Characters {
@@ -38,14 +31,18 @@ public class Characters {
 	@Column(name = "name")
 	private String name;
 	
-	@Column(name = "skill_set")
-	private String skill;
+	@Column(name = "image")
+	private String image;
+	
+	@Column(name = "gender")
+	private String gender;
+	
+	@JsonManagedReference
+	@OneToMany(mappedBy = "skill", fetch = FetchType.EAGER)
+	private List<Skill> skill = new ArrayList<>();
 	
 	@Column(name = "special_ability")
 	private String special;
-	
-	@Column(name = "image")
-	private String image;
 	
 	@Column(name = "profile")
 	private String profile;
@@ -53,7 +50,8 @@ public class Characters {
 	@Column(name = "rank")
 	private String rank;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonBackReference
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "series_id")
 	private Series series;
 	
@@ -62,27 +60,28 @@ public class Characters {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Characters(int charId, String name, Series series, String skill, String special, String image,
-			String profile, String rank) {
+	public Characters(int charId, String name, String image, String gender, List<Skill> skill, String special,
+			String profile, String rank, Series series) {
 		super();
 		this.charId = charId;
 		this.name = name;
-		this.series = series;
+		this.image = image;
+		this.gender = gender;
 		this.skill = skill;
 		this.special = special;
-		this.image = image;
 		this.profile = profile;
 		this.rank = rank;
+		this.series = series;
 	}
 
-	
-	public Characters(String name, String skill, String special, String image, String profile, String rank,
-			Series series) {
+	public Characters(String name, String image, String gender, List<Skill> skill, String special, String profile,
+			String rank, Series series) {
 		super();
 		this.name = name;
+		this.image = image;
+		this.gender = gender;
 		this.skill = skill;
 		this.special = special;
-		this.image = image;
 		this.profile = profile;
 		this.rank = rank;
 		this.series = series;
@@ -104,19 +103,27 @@ public class Characters {
 		this.name = name;
 	}
 
-	public Series getSeries() {
-		return series;
+	public String getImage() {
+		return image;
 	}
 
-	public void setSeries(Series series) {
-		this.series = series;
+	public void setImage(String image) {
+		this.image = image;
 	}
 
-	public String getSkill() {
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public List<Skill> getSkill() {
 		return skill;
 	}
 
-	public void setSkill(String skill) {
+	public void setSkill(List<Skill> skill) {
 		this.skill = skill;
 	}
 
@@ -126,14 +133,6 @@ public class Characters {
 
 	public void setSpecial(String special) {
 		this.special = special;
-	}
-
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
 	}
 
 	public String getProfile() {
@@ -152,32 +151,42 @@ public class Characters {
 		this.rank = rank;
 	}
 
+	public Series getSeries() {
+		return series;
+	}
+
+	public void setSeries(Series series) {
+		this.series = series;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(charId, image, name, profile, rank, series, skill, special);
+		return Objects.hash(charId, gender, image, name, profile, rank, series, skill, special);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (!(obj instanceof Characters)) {
 			return false;
-		if (getClass() != obj.getClass())
-			return false;
+		}
 		Characters other = (Characters) obj;
-		return charId == other.charId && Objects.equals(image, other.image) && Objects.equals(name, other.name)
-				&& Objects.equals(profile, other.profile) && Objects.equals(rank, other.rank)
-				&& Objects.equals(series, other.series) && Objects.equals(skill, other.skill)
-				&& Objects.equals(special, other.special);
+		return charId == other.charId && Objects.equals(gender, other.gender) && Objects.equals(image, other.image)
+				&& Objects.equals(name, other.name) && Objects.equals(profile, other.profile)
+				&& Objects.equals(rank, other.rank) && Objects.equals(series, other.series)
+				&& Objects.equals(skill, other.skill) && Objects.equals(special, other.special);
 	}
 
 	@Override
 	public String toString() {
-		return "Characters [charId=" + charId + ", name=" + name + ", series=" + series + ", skill=" + skill
-				+ ", special=" + special + ", image=" + image + ", profile=" + profile + ", rank=" + rank + "]";
+		return "Characters [charId=" + charId + ", name=" + name + ", image=" + image + ", gender=" + gender
+				+ ", skill=" + skill + ", special=" + special + ", profile=" + profile + ", rank=" + rank + ", series="
+				+ series + "]";
 	}
 
+	
 	
 	
 	

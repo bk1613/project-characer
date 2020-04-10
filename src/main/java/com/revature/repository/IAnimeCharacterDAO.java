@@ -5,7 +5,6 @@ import com.revature.model.Characters;
 import java.util.List;
 import java.util.Set;
 
-import com.revature.model.AnimeSeries;
 import com.revature.model.Series;
 
 public interface IAnimeCharacterDAO {

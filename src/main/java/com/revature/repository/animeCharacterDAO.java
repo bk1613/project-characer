@@ -42,8 +42,7 @@ public class AnimeCharacterDAO implements IAnimeCharacterDAO {
 	public Characters findBySeries(Series t) {
 		// TODO Auto-generated method stub
 		Session s = sf.getCurrentSession();
-		
-		return null;
+		return s.get(Characters.class, t.getSeries());
 	}
 
 	@Override

@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.revature.model.AnimeSeries;
 import com.revature.model.Characters;
 import com.revature.model.Series;
 
@@ -38,10 +37,34 @@ public class AnimeSeriesDAO implements IAnimeSeriesDAO {
 	}
 
 	@Override
-	public Series findByname(AnimeSeries name) {
+	public Series findByname(String name) {
 		// TODO Auto-generated method stub
 		Session s = sf.getCurrentSession();
 		return s.get(Series.class, name);
+	}
+
+	@Override
+	public void insert(Series se) {
+		// TODO Auto-generated method stub
+		Session s = sf.getCurrentSession();
+		s.save(se);
+
+	}
+
+	@Override
+	public void delete(Series se) {
+		// TODO Auto-generated method stub
+		Session s = sf.getCurrentSession();
+		s.delete(se);
+
+	}
+
+	@Override
+	public void update(Series se) {
+		// TODO Auto-generated method stub
+		Session s = sf.getCurrentSession();
+		s.update(se);
+
 	}
 
 }
