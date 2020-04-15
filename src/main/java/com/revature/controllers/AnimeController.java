@@ -25,7 +25,7 @@ import com.revature.repository.ICharacterSkillDAO;
 @RequestMapping(value="anime")
 @CrossOrigin
 public class AnimeController {
-	
+
 	private IAnimeCharacterDAO cdao;
 	private IAnimeSeriesDAO sdao;
 	private ICharacterSkillDAO skdao;
@@ -45,32 +45,29 @@ public class AnimeController {
 		return ResponseEntity.status(HttpStatus.OK).body(sdao.findAll());
 	}
 	
-	@GetMapping(value="/{id}")
-	public ResponseEntity<Series> getSeriesbyid(@PathVariable("id") int id) {
-		return ResponseEntity.status(HttpStatus.OK).body(sdao.findById(id));
-	}
-	
 	@GetMapping(value="/{name}")
-	public ResponseEntity<Series> getSeriesbyname(@PathVariable("name") String name) {
-		return ResponseEntity.status(HttpStatus.OK).body(sdao.findByname(name));
+	public ResponseEntity<Characters> getCharacterbyname(@PathVariable("id") String name) {
+		return ResponseEntity.status(HttpStatus.OK).body(cdao.findByname(name));
 	}
 	
-	@PostMapping
+	@PostMapping("/ser/insert")
 	public  ResponseEntity<List<Series>> newSeries(@RequestBody Series s) {
+		System.out.println("adding series");
 		sdao.insert(s);
 		return ResponseEntity.status(HttpStatus.OK).body(sdao.findAll());
 	}
 	
 	@PutMapping("/char/insert")
-	public ResponseEntity<List<Series>> newCharacter(@RequestBody Characters c) {
+	public ResponseEntity<List<Characters>> newCharacter(@RequestBody Characters c) {
+		System.out.println("adding character");
 		cdao.insert(c);
-		return ResponseEntity.status(HttpStatus.OK).body(sdao.findAll());
+		return ResponseEntity.status(HttpStatus.OK).body(cdao.findAll());
 	}
 	
 	@PutMapping("/ski/insert")
-	public  ResponseEntity<List<Characters>> newSkills(@RequestBody Skill s) {
+	public  ResponseEntity<List<Skill>> newSkills(@RequestBody Skill s) {
 		skdao.insert(s);
-		return ResponseEntity.status(HttpStatus.OK).body(cdao.findAll());
+		return ResponseEntity.status(HttpStatus.OK).body(skdao.findAll());
 	}
 	
 	@Autowired
@@ -104,6 +101,4 @@ public class AnimeController {
 	public void setSkdao(ICharacterSkillDAO skdao) {
 		this.skdao = skdao;
 	}
-	
-	
 }

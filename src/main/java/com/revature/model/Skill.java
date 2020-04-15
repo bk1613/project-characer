@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+@Component
 @Entity
 @Table(name = "SKILLS")
 public class Skill {

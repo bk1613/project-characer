@@ -17,21 +17,26 @@ import javax.persistence.OneToMany;
 //import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+@Component
 @Entity
 @Table(name = "SERIES")
 public class Series {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
 	private int series_Id;
 	
-	@Column(name = "SeriesName")
+	@Column(name = "SeriesName", length=100)
 	private String series;
+	
+	@Column(name = "SeriesImage", length=1000)
+	private String seriesimage;
 
-	@Column(name = "SeriesDescrip")
+	@Column(name = "SeriesDescrip", length=2000)
 	private String description;
 	
 	@JsonManagedReference
@@ -43,17 +48,19 @@ public class Series {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Series(int series_Id, String series, String description, List<Characters> characters) {
+	public Series(int series_Id, String series, String seriesimage, String description, List<Characters> characters) {
 		super();
 		this.series_Id = series_Id;
 		this.series = series;
+		this.seriesimage = seriesimage;
 		this.description = description;
 		this.characters = characters;
 	}
 
-	public Series(String series, String description, List<Characters> characters) {
+	public Series(String series, String seriesimage, String description, List<Characters> characters) {
 		super();
 		this.series = series;
+		this.seriesimage = seriesimage;
 		this.description = description;
 		this.characters = characters;
 	}
@@ -74,6 +81,14 @@ public class Series {
 		this.series = series;
 	}
 
+	public String getSeriesimage() {
+		return seriesimage;
+	}
+
+	public void setSeriesimage(String seriesimage) {
+		this.seriesimage = seriesimage;
+	}
+
 	public String getDescription() {
 		return description;
 	}
@@ -92,7 +107,7 @@ public class Series {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(characters, description, series, series_Id);
+		return Objects.hash(characters, description, series, series_Id, seriesimage);
 	}
 
 	@Override
@@ -105,13 +120,14 @@ public class Series {
 		}
 		Series other = (Series) obj;
 		return Objects.equals(characters, other.characters) && Objects.equals(description, other.description)
-				&& Objects.equals(series, other.series) && series_Id == other.series_Id;
+				&& Objects.equals(series, other.series) && series_Id == other.series_Id
+				&& Objects.equals(seriesimage, other.seriesimage);
 	}
 
 	@Override
 	public String toString() {
-		return "Series [series_Id=" + series_Id + ", series=" + series + ", description=" + description
-				+ ", characters=" + characters + "]";
+		return "Series [series_Id=" + series_Id + ", series=" + series + ", seriesimage=" + seriesimage
+				+ ", description=" + description + ", characters=" + characters + "]";
 	}
 	
 		
