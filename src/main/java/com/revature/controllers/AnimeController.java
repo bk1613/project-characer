@@ -2,6 +2,8 @@ package com.revature.controllers;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,11 +23,14 @@ import com.revature.repository.IAnimeCharacterDAO;
 import com.revature.repository.IAnimeSeriesDAO;
 import com.revature.repository.ICharacterSkillDAO;
 
+
 @RestController
 @RequestMapping(value="anime")
 @CrossOrigin
 public class AnimeController {
 
+	private static Logger log = LogManager.getLogger(AnimeController.class);
+	
 	private IAnimeCharacterDAO cdao;
 	private IAnimeSeriesDAO sdao;
 	private ICharacterSkillDAO skdao;
@@ -33,7 +38,7 @@ public class AnimeController {
 	@GetMapping("/animecharacter")
 	public ResponseEntity<List<Characters>> getAllCharacters(){
 		//System.out.println(cdao.findAll());
-		System.out.println("Finding all characters");
+		log.info("Finding all characters");
 		Series s = cdao.findById(19).getSeries();
 		System.out.println(s.getsId());
 		return ResponseEntity.status(HttpStatus.OK).body(cdao.findAll());
@@ -41,12 +46,13 @@ public class AnimeController {
 	
 	@GetMapping("/characterskill")
 	public ResponseEntity<List<Skill>> getAllCharSkill(){
+		log.info("Finding all skills");
 		return ResponseEntity.status(HttpStatus.OK).body(skdao.findAll());
 	}
 	
 	@GetMapping("/animeseries")
 	public ResponseEntity<List<Series>> getAllSeries(){
-		System.out.println();
+		log.info("Finding all series");
 		return ResponseEntity.status(HttpStatus.OK).body(sdao.findAll());
 	}
 	
@@ -57,10 +63,8 @@ public class AnimeController {
 	
 	@PostMapping("/ser/insert")
 	public  ResponseEntity<List<Series>> newSeries(@RequestBody Series s) {
-		System.out.println("adding series");
-		System.out.println(s.getsId());
-		System.out.println(s.getDescription());
-		System.out.println(s.getName());
+		
+		log.info("adding series");
 		sdao.insert(s);
 		return ResponseEntity.status(HttpStatus.OK).body(sdao.findAll());
 	}
@@ -68,15 +72,15 @@ public class AnimeController {
 	@PutMapping("/char/insert")
 	public ResponseEntity<List<Characters>> newCharacter(@RequestBody Characters c) {
 		System.out.println(c.getSeries().getsId());
-		System.out.println("adding character");
+		log.info("adding character");
 		cdao.insert(c);
 		return ResponseEntity.status(HttpStatus.OK).body(cdao.findAll());
 	}
 	
 	@PutMapping("/ski/insert")
 	public  ResponseEntity<List<Skill>> newSkills(@RequestBody Skill s) {
-		System.out.println(s.getSkillname());
-		System.out.println(s.getCharacter().getName());
+		
+		log.info("adding skill");
 		skdao.insert(s);
 		return ResponseEntity.status(HttpStatus.OK).body(skdao.findAll());
 	}

@@ -14,8 +14,13 @@ public class LoggingAspect {
 	private long start;
 	private long end;
 	
-	@Before("within(com.revature.repository.*)")
+	@Before("within(com.revature.model.*)")
 	public void logModelMethods(JoinPoint jp) {
+		log.info(jp.getTarget() + " invoked " + jp.getSignature());
+	}
+	
+	@Before("within(com.revature.repository.*)")
+	public void logrepoMethods(JoinPoint jp) {
 		log.info(jp.getTarget() + " invoked " + jp.getSignature());
 	}
 	

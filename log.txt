@@ -1,0 +1,3 @@
+2020-04-17 12:38:15 INFO  AnimeController:65 - adding series
+2020-04-17 12:38:15 INFO  AnimeController:69 - adding series
+2020-04-17 12:41:09 INFO  AnimeController:68 - adding series
