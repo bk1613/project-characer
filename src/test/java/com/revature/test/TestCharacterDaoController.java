@@ -1,18 +1,14 @@
 package com.revature.test;
 
-import static org.junit.Assert.*;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
 
 import com.revature.controllers.AnimeController;
-import com.revature.model.Characters;
-import com.revature.model.Series;
+
 import com.revature.repository.AnimeCharacterDAO;
 import com.revature.repository.AnimeSeriesDAO;
 import com.revature.repository.CharacterSkillDAO;
