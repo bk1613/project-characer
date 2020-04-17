@@ -27,17 +27,20 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class Series {
 	
 	@Id
+//	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
-	private int series_Id;
+	private int sId;
 	
 	@Column(name = "SeriesName", length=100)
-	private String series;
+	private String name;
 	
 	@Column(name = "SeriesImage", length=1000)
-	private String seriesimage;
+	private String image;
 
 	@Column(name = "SeriesDescrip", length=2000)
 	private String description;
+	
+	//mappedBy = "series",
 	
 	@JsonManagedReference
 	@OneToMany(mappedBy = "series", fetch = FetchType.EAGER)
@@ -48,45 +51,45 @@ public class Series {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Series(int series_Id, String series, String seriesimage, String description, List<Characters> characters) {
+	public Series(int sId, String name, String image, String description, List<Characters> characters) {
 		super();
-		this.series_Id = series_Id;
-		this.series = series;
-		this.seriesimage = seriesimage;
+		this.sId = sId;
+		this.name = name;
+		this.image = image;
 		this.description = description;
 		this.characters = characters;
 	}
 
-	public Series(String series, String seriesimage, String description, List<Characters> characters) {
+	public Series(String name, String image, String description, List<Characters> characters) {
 		super();
-		this.series = series;
-		this.seriesimage = seriesimage;
+		this.name = name;
+		this.image = image;
 		this.description = description;
 		this.characters = characters;
 	}
 
-	public int getSeries_Id() {
-		return series_Id;
+	public int getsId() {
+		return sId;
 	}
 
-	public void setSeries_Id(int series_Id) {
-		this.series_Id = series_Id;
+	public void setsId(int sId) {
+		this.sId = sId;
 	}
 
-	public String getSeries() {
-		return series;
+	public String getName() {
+		return name;
 	}
 
-	public void setSeries(String series) {
-		this.series = series;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getSeriesimage() {
-		return seriesimage;
+	public String getImage() {
+		return image;
 	}
 
-	public void setSeriesimage(String seriesimage) {
-		this.seriesimage = seriesimage;
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	public String getDescription() {
@@ -107,7 +110,7 @@ public class Series {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(characters, description, series, series_Id, seriesimage);
+		return Objects.hash(characters, description, image, name, sId);
 	}
 
 	@Override
@@ -120,15 +123,13 @@ public class Series {
 		}
 		Series other = (Series) obj;
 		return Objects.equals(characters, other.characters) && Objects.equals(description, other.description)
-				&& Objects.equals(series, other.series) && series_Id == other.series_Id
-				&& Objects.equals(seriesimage, other.seriesimage);
+				&& Objects.equals(image, other.image) && Objects.equals(name, other.name) && sId == other.sId;
 	}
 
 	@Override
 	public String toString() {
-		return "Series [series_Id=" + series_Id + ", series=" + series + ", seriesimage=" + seriesimage
-				+ ", description=" + description + ", characters=" + characters + "]";
+		return "Series [sId=" + sId + ", name=" + name + ", image=" + image + ", description=" + description
+				+ ", characters=" + characters + "]";
 	}
-	
 		
 }

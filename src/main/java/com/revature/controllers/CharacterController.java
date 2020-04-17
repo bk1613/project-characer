@@ -26,74 +26,74 @@ import com.revature.repository.IAnimeSeriesDAO;
 @CrossOrigin
 public class CharacterController {
 	
-	@Autowired
-	private IAnimeCharacterDAO cdao;
-	
-	@Autowired
-	private IAnimeSeriesDAO sdao;
-	
-	@GetMapping
-	public ResponseEntity<List<Characters>> findAll(){
-		List<Characters> pok = cdao.findAll();
-		if(pok ==null) {
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-		}
-		return ResponseEntity.status(HttpStatus.OK).body(pok);
-	}
-	
-	@GetMapping("/{id}")
-	public ResponseEntity<Characters> findById(@PathVariable("id") int id){
-		Characters p = cdao.findById(id);
-		if(p ==null) {
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-		}
-		return ResponseEntity.status(HttpStatus.OK).body(p);
-	}
-	
-	@GetMapping("/{name}")
-	public ResponseEntity<Characters> findByName(@PathVariable("name") String name){
-		Characters p = cdao.findByname(name);
-		if(p ==null) {
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-		}
-		return ResponseEntity.status(HttpStatus.OK).body(p);
-	}
-	
-	@GetMapping("/{series}")
-	public ResponseEntity<Characters> findBySeries(@PathVariable("series") Series s){
-		Characters c = cdao.findBySeries(s);
-		if(c ==null) {
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-		}
-		return ResponseEntity.status(HttpStatus.OK).body(c);
-	}
-	
-	@PutMapping("/update")
-	public ResponseEntity<Characters> update(@RequestBody Characters p){
-		cdao.update(p);
-		if(p ==null) {
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-		}
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body(p);
-	}
-	
-	@PutMapping("/delete")
-	public ResponseEntity<Characters> delete(@RequestBody Characters p){
-		cdao.delete(p);
-		if(p ==null) {
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-		}
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body(p);
-	}
-	
-	@PostMapping("/insert")
-	public ResponseEntity<List<Series>> insert(@RequestBody Characters c){
-		cdao.insert(c);
-		List<Series> ser = sdao.findAll();
-		if(c ==null) {
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-		}
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body(ser);
-	}
+//	@Autowired
+//	private IAnimeCharacterDAO cdao;
+//	
+//	@Autowired
+//	private IAnimeSeriesDAO sdao;
+//	
+//	@GetMapping
+//	public ResponseEntity<List<Characters>> findAll(){
+//		List<Characters> pok = cdao.findAll();
+//		if(pok ==null) {
+//			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+//		}
+//		return ResponseEntity.status(HttpStatus.OK).body(pok);
+//	}
+//	
+//	@GetMapping("/{id}")
+//	public ResponseEntity<Characters> findById(@PathVariable("id") int id){
+//		Characters p = cdao.findById(id);
+//		if(p ==null) {
+//			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+//		}
+//		return ResponseEntity.status(HttpStatus.OK).body(p);
+//	}
+//	
+//	@GetMapping("/{name}")
+//	public ResponseEntity<Characters> findByName(@PathVariable("name") String name){
+//		Characters p = cdao.findByname(name);
+//		if(p ==null) {
+//			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+//		}
+//		return ResponseEntity.status(HttpStatus.OK).body(p);
+//	}
+//	
+//	@GetMapping("/{series}")
+//	public ResponseEntity<Characters> findBySeries(@PathVariable("series") Series s){
+//		Characters c = cdao.findBySeries(s);
+//		if(c ==null) {
+//			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+//		}
+//		return ResponseEntity.status(HttpStatus.OK).body(c);
+//	}
+//	
+//	@PutMapping("/update")
+//	public ResponseEntity<Characters> update(@RequestBody Characters p){
+//		cdao.update(p);
+//		if(p ==null) {
+//			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+//		}
+//		return ResponseEntity.status(HttpStatus.ACCEPTED).body(p);
+//	}
+//	
+//	@PutMapping("/delete")
+//	public ResponseEntity<Characters> delete(@RequestBody Characters p){
+//		cdao.delete(p);
+//		if(p ==null) {
+//			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+//		}
+//		return ResponseEntity.status(HttpStatus.ACCEPTED).body(p);
+//	}
+//	
+//	@PostMapping("/insert")
+//	public ResponseEntity<List<Series>> insert(@RequestBody Characters c){
+//		cdao.insert(c);
+//		List<Series> ser = sdao.findAll();
+//		if(c ==null) {
+//			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+//		}
+//		return ResponseEntity.status(HttpStatus.ACCEPTED).body(ser);
+//	}
 	
 }

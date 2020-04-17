@@ -28,27 +28,29 @@ public class Skill {
 	private int skillId;
 	
 	@Column(name = "skill")
-	private String skill;
+	private String skillname;
 	
 	@JsonBackReference
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "charId")
-	private Characters chara;
+	private Characters character;
 
 	public Skill() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Skill(int skillId, String skill) {
+	public Skill(int skillId, String skillname, Characters character) {
 		super();
 		this.skillId = skillId;
-		this.skill = skill;
+		this.skillname = skillname;
+		this.character = character;
 	}
 
-	public Skill(String skill) {
+	public Skill(String skillname, Characters character) {
 		super();
-		this.skill = skill;
+		this.skillname = skillname;
+		this.character = character;
 	}
 
 	public int getSkillId() {
@@ -59,17 +61,25 @@ public class Skill {
 		this.skillId = skillId;
 	}
 
-	public String getSkill() {
-		return skill;
+	public String getSkillname() {
+		return skillname;
 	}
 
-	public void setSkill(String skill) {
-		this.skill = skill;
+	public void setSkillname(String skillname) {
+		this.skillname = skillname;
+	}
+
+	public Characters getCharacter() {
+		return character;
+	}
+
+	public void setCharacter(Characters character) {
+		this.character = character;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(skill, skillId);
+		return Objects.hash(character, skillId, skillname);
 	}
 
 	@Override
@@ -81,13 +91,15 @@ public class Skill {
 			return false;
 		}
 		Skill other = (Skill) obj;
-		return Objects.equals(skill, other.skill) && skillId == other.skillId;
+		return Objects.equals(character, other.character) && skillId == other.skillId
+				&& Objects.equals(skillname, other.skillname);
 	}
 
 	@Override
 	public String toString() {
-		return "Skill [skillId=" + skillId + ", skill=" + skill + "]";
+		return "Skill [skillId=" + skillId + ", skillname=" + skillname + ", character=" + character + "]";
 	}
+
 	
 	
 }

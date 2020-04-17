@@ -21,6 +21,4 @@ public interface IAnimeCharacterDAO {
 	
 	public void update(Characters p);
 	
-	public Characters findByname(String name);
-	
 }

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -29,7 +28,7 @@ public class Characters {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
-	private int charId;
+	private int CharId;
 	
 	@Column(name = "name")
 	private String name;
@@ -39,12 +38,12 @@ public class Characters {
 	
 	@Column(name = "gender")
 	private String gender;
-	
+	//mappedBy = "skill"
 	@JsonManagedReference
-	@OneToMany(mappedBy = "skill", fetch = FetchType.EAGER)
-	private List<Skill> skill = new ArrayList<>();
+	@OneToMany(mappedBy = "character", fetch = FetchType.EAGER)
+	private List<Skill> skills = new ArrayList<>();
 	
-	@Column(name = "special_ability")
+	@Column(name = "special")
 	private String special;
 	
 	@Column(name = "profile")
@@ -54,8 +53,9 @@ public class Characters {
 	private String rank;
 	
 	@JsonBackReference
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "series_id")
+//	@Column(name = "series_id")
 	private Series series;
 	
 	public Characters() {
@@ -63,27 +63,27 @@ public class Characters {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Characters(int charId, String name, String image, String gender, List<Skill> skill, String special,
+	public Characters(int charId, String name, String image, String gender, List<Skill> skills, String special,
 			String profile, String rank, Series series) {
 		super();
-		this.charId = charId;
+		CharId = charId;
 		this.name = name;
 		this.image = image;
 		this.gender = gender;
-		this.skill = skill;
+		this.skills = skills;
 		this.special = special;
 		this.profile = profile;
 		this.rank = rank;
 		this.series = series;
 	}
 
-	public Characters(String name, String image, String gender, List<Skill> skill, String special, String profile,
+	public Characters(String name, String image, String gender, List<Skill> skills, String special, String profile,
 			String rank, Series series) {
 		super();
 		this.name = name;
 		this.image = image;
 		this.gender = gender;
-		this.skill = skill;
+		this.skills = skills;
 		this.special = special;
 		this.profile = profile;
 		this.rank = rank;
@@ -91,11 +91,11 @@ public class Characters {
 	}
 
 	public int getCharId() {
-		return charId;
+		return CharId;
 	}
 
 	public void setCharId(int charId) {
-		this.charId = charId;
+		CharId = charId;
 	}
 
 	public String getName() {
@@ -122,12 +122,12 @@ public class Characters {
 		this.gender = gender;
 	}
 
-	public List<Skill> getSkill() {
-		return skill;
+	public List<Skill> getSkills() {
+		return skills;
 	}
 
-	public void setSkill(List<Skill> skill) {
-		this.skill = skill;
+	public void setSkills(List<Skill> skills) {
+		this.skills = skills;
 	}
 
 	public String getSpecial() {
@@ -164,7 +164,7 @@ public class Characters {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(charId, gender, image, name, profile, rank, series, skill, special);
+		return Objects.hash(CharId, gender, image, name, profile, rank, series, skills, special);
 	}
 
 	@Override
@@ -176,21 +176,17 @@ public class Characters {
 			return false;
 		}
 		Characters other = (Characters) obj;
-		return charId == other.charId && Objects.equals(gender, other.gender) && Objects.equals(image, other.image)
+		return CharId == other.CharId && Objects.equals(gender, other.gender) && Objects.equals(image, other.image)
 				&& Objects.equals(name, other.name) && Objects.equals(profile, other.profile)
 				&& Objects.equals(rank, other.rank) && Objects.equals(series, other.series)
-				&& Objects.equals(skill, other.skill) && Objects.equals(special, other.special);
+				&& Objects.equals(skills, other.skills) && Objects.equals(special, other.special);
 	}
 
 	@Override
 	public String toString() {
-		return "Characters [charId=" + charId + ", name=" + name + ", image=" + image + ", gender=" + gender
-				+ ", skill=" + skill + ", special=" + special + ", profile=" + profile + ", rank=" + rank + ", series="
-				+ series + "]";
+		return "Characters [CharId=" + CharId + ", name=" + name + ", image=" + image + ", gender=" + gender
+				+ ", skills=" + skills + ", special=" + special + ", profile=" + profile + ", rank=" + rank
+				+ ", series=" + series + "]";
 	}
 
-	
-	
-	
-	
 }

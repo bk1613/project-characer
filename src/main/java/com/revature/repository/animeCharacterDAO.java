@@ -42,7 +42,7 @@ public class AnimeCharacterDAO implements IAnimeCharacterDAO {
 	public Characters findBySeries(Series t) {
 		// TODO Auto-generated method stub
 		Session s = sf.getCurrentSession();
-		return s.get(Characters.class, t.getSeries());
+		return s.get(Characters.class, t.getName());
 	}
 
 	@Override
@@ -66,11 +66,6 @@ public class AnimeCharacterDAO implements IAnimeCharacterDAO {
 		s.update(p);
 	}
 
-	@Override
-	public Characters findByname(String name) {
-		// TODO Auto-generated method stub
-		Session s = sf.getCurrentSession();
-		return s.get(Characters.class, name);
-	}
+	
 
 }

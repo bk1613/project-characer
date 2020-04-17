@@ -24,66 +24,66 @@ import com.revature.repository.IAnimeSeriesDAO;
 @CrossOrigin
 public class SeriesController {
 
-	@Autowired
-	private IAnimeSeriesDAO sdao;
-	
-	@Autowired
-	private IAnimeCharacterDAO cdao;
-	
-	@GetMapping
-	public ResponseEntity<List<Series>> findAll(){
-		List<Series> ser = sdao.findAll();
-		if(ser ==null) {
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-		}
-		return ResponseEntity.status(HttpStatus.OK).body(ser);
-	}
-	
-	@GetMapping("/{id}")
-	public ResponseEntity<Series> findById(@PathVariable("id") int id){
-		Series s = sdao.findById(id);
-		if(s ==null) {
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-		}
-		return ResponseEntity.status(HttpStatus.OK).body(s);
-	}
-	
-	@GetMapping("/{name}")
-	public ResponseEntity<Series> findByname(@PathVariable("name") String name){
-		Series s = sdao.findByname(name);
-		if(s ==null) {
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-		}
-		return ResponseEntity.status(HttpStatus.OK).body(s);
-	}
-	
-	@PutMapping("/update")
-	public ResponseEntity<Series> update(@RequestBody Series p){
-		sdao.update(p);
-		if(p ==null) {
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-		}
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body(p);
-	}
-	
-	@PutMapping("/delete")
-	public ResponseEntity<Series> delete(@RequestBody Series p){
-		sdao.delete(p);
-		if(p ==null) {
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-		}
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body(p);
-	}
-	
-	@PostMapping("/insert")
-	public ResponseEntity<List<Series>> insert(@RequestBody Characters c){
-		cdao.insert(c);
-		List<Series> ser = sdao.findAll();
-		if(c ==null) {
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-		}
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body(ser);
-	}
+//	@Autowired
+//	private IAnimeSeriesDAO sdao;
+//	
+//	@Autowired
+//	private IAnimeCharacterDAO cdao;
+//	
+//	@GetMapping
+//	public ResponseEntity<List<Series>> findAll(){
+//		List<Series> ser = sdao.findAll();
+//		if(ser ==null) {
+//			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+//		}
+//		return ResponseEntity.status(HttpStatus.OK).body(ser);
+//	}
+//	
+//	@GetMapping("/{id}")
+//	public ResponseEntity<Series> findById(@PathVariable("id") int id){
+//		Series s = sdao.findById(id);
+//		if(s ==null) {
+//			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+//		}
+//		return ResponseEntity.status(HttpStatus.OK).body(s);
+//	}
+//	
+//	@GetMapping("/{name}")
+//	public ResponseEntity<Series> findByname(@PathVariable("name") String name){
+//		Series s = sdao.findByname(name);
+//		if(s ==null) {
+//			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+//		}
+//		return ResponseEntity.status(HttpStatus.OK).body(s);
+//	}
+//	
+//	@PutMapping("/update")
+//	public ResponseEntity<Series> update(@RequestBody Series p){
+//		sdao.update(p);
+//		if(p ==null) {
+//			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+//		}
+//		return ResponseEntity.status(HttpStatus.ACCEPTED).body(p);
+//	}
+//	
+//	@PutMapping("/delete")
+//	public ResponseEntity<Series> delete(@RequestBody Series p){
+//		sdao.delete(p);
+//		if(p ==null) {
+//			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+//		}
+//		return ResponseEntity.status(HttpStatus.ACCEPTED).body(p);
+//	}
+//	
+//	@PostMapping("/insert")
+//	public ResponseEntity<List<Series>> insert(@RequestBody Characters c){
+//		cdao.insert(c);
+//		List<Series> ser = sdao.findAll();
+//		if(c ==null) {
+//			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+//		}
+//		return ResponseEntity.status(HttpStatus.ACCEPTED).body(ser);
+//	}
 	
 	
 }

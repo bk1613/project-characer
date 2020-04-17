@@ -47,7 +47,7 @@ public class AnimeSeriesDAO implements IAnimeSeriesDAO {
 	public void insert(Series se) {
 		// TODO Auto-generated method stub
 		Session s = sf.getCurrentSession();
-		s.save(se);
+		s.saveOrUpdate(se);
 
 	}
 

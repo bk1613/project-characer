@@ -21,7 +21,6 @@ public class CharacterSkillDAO implements ICharacterSkillDAO {
 	
 	@Override
 	public List<Skill> findAll() {
-		// TODO Auto-generated method stub
 		Session s = sf.getCurrentSession();
 		CriteriaQuery<Skill> cq = s.getCriteriaBuilder().createQuery(Skill.class);
 		cq.from(Skill.class);
@@ -30,7 +29,6 @@ public class CharacterSkillDAO implements ICharacterSkillDAO {
 
 	@Override
 	public void insert(Skill sk) {
-		// TODO Auto-generated method stub
 		Session s = sf.getCurrentSession();
 		s.save(sk);
 	}
