@@ -12,3 +12,12 @@
 2020-04-17 14:39:14 INFO  AnimeController:55 - Finding all series
 2020-04-17 14:39:14 INFO  AnimeController:55 - Finding all series
 2020-04-17 14:39:15 INFO  AnimeController:55 - Finding all series
+2020-04-17 19:57:48 INFO  AnimeController:55 - Finding all series
+2020-04-17 19:57:50 INFO  AnimeController:55 - Finding all series
+2020-04-17 19:58:04 INFO  AnimeController:55 - Finding all series
+2020-04-17 19:58:04 INFO  AnimeController:55 - Finding all series
+2020-04-17 19:59:21 INFO  AnimeController:75 - adding character
+2020-04-17 19:59:22 INFO  AnimeController:55 - Finding all series
+2020-04-17 19:59:44 INFO  AnimeController:41 - Finding all characters
+2020-04-17 19:59:44 INFO  AnimeController:83 - adding skill
+2020-04-17 19:59:45 INFO  AnimeController:55 - Finding all series
