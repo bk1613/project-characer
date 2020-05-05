@@ -2,21 +2,33 @@ package com.revature.test;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+
+import com.animation.model.Characters;
+import com.animation.model.Series;
+import com.animation.repository.AnimeCharacterDAO;
+import com.animation.repository.AnimeSeriesDAO;
+import com.animation.repository.CharacterSkillDAO;
 
 
 
 public class TestControllerDAO {
 	//private AnimeController ac = null;
-//	private AnimeCharacterDAO cdao = null;
+	private AnimeCharacterDAO cdao = null;
 //	private AnimeSeriesDAO sdao = null;
 //	private CharacterSkillDAO skdao = null;
 //	
+//	@Autowired
+//	private MockMvc mvc;
 
 	@Before
 	public void setUp() throws Exception {
-//		cdao = new AnimeCharacterDAO();
+		cdao = new AnimeCharacterDAO();
 //		sdao = new AnimeSeriesDAO();
 //		skdao = new CharacterSkillDAO();
 		//ac = new AnimeController(cdao, sdao, skdao);
@@ -24,6 +36,10 @@ public class TestControllerDAO {
 
 	@Test
 	public void testfinAll() {
+		
+//		for(Characters c:cdao.findAll()) {
+			
+//		}
 //		for(Characters c: cdao.findAll()) {
 //			if(c.getCharId() == 19) {
 //				assertEquals("Kenshiro", c.getName());
@@ -32,4 +48,17 @@ public class TestControllerDAO {
 		
 	}
 
+	@Test
+	public void testinsert() {
+//		Series s = new Series(0, "series name", "simage", "sdesc", new ArrayList<>());
+//		cdao.insert(new Characters("AyyLmao", 
+//				"image", 
+//				"male", 
+//				new ArrayList<>(),
+//				"ability", 
+//				"description", 
+//				"rank", 
+//				s));
+		
+	}
 }
